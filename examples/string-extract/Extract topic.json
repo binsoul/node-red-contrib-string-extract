@@ -1,0 +1,194 @@
+[
+    {
+        "id": "cce8e835144d8c58",
+        "type": "tab",
+        "label": "Extract topic",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "fa71d9d1d99b3d19",
+        "type": "inject",
+        "z": "cce8e835144d8c58",
+        "name": "Basement",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "basement_wine-cellar_thermostat_actual_temperature",
+        "payload": "1+$floor($random() * 10)",
+        "payloadType": "jsonata",
+        "x": 380,
+        "y": 240,
+        "wires": [
+            [
+                "64caba78d1c97cf1"
+            ]
+        ]
+    },
+    {
+        "id": "5bc1660b5c800f40",
+        "type": "debug",
+        "z": "cce8e835144d8c58",
+        "name": "Message",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 900,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "64caba78d1c97cf1",
+        "type": "binsoul-string-extract",
+        "z": "cce8e835144d8c58",
+        "extractionMode": "regexp",
+        "extractionRegexpPattern": "(.*?)_(.*?)_(.*?)_(.*)",
+        "extractionRegexpFlags": [],
+        "extractionSplitSeparator": "_",
+        "inputValueProperty": "topic",
+        "inputValueSource": "msg",
+        "outputMapping": [
+            {
+                "outputTarget": "msg",
+                "outputProperty": "floor",
+                "valueSource": "jsonata",
+                "valueProperty": "$uppercase(value1)"
+            },
+            {
+                "outputTarget": "msg",
+                "outputProperty": "room",
+                "valueSource": "match",
+                "valueProperty": "2"
+            },
+            {
+                "outputTarget": "msg",
+                "outputProperty": "device",
+                "valueSource": "match",
+                "valueProperty": "3"
+            },
+            {
+                "outputTarget": "msg",
+                "outputProperty": "sensor",
+                "valueSource": "jsonata",
+                "valueProperty": "$replace(value4, 'actual_', '')"
+            },
+            {
+                "outputTarget": "msg",
+                "outputProperty": "matches",
+                "valueSource": "matches",
+                "valueProperty": ""
+            }
+        ],
+        "name": "",
+        "x": 670,
+        "y": 240,
+        "wires": [
+            [
+                "5bc1660b5c800f40"
+            ]
+        ]
+    },
+    {
+        "id": "f8114ee235edc461",
+        "type": "inject",
+        "z": "cce8e835144d8c58",
+        "name": "Ground floor",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ground-floor_kitchen_motion-detector_motion",
+        "payload": "1+$floor($random() * 10)",
+        "payloadType": "jsonata",
+        "x": 390,
+        "y": 300,
+        "wires": [
+            [
+                "64caba78d1c97cf1"
+            ]
+        ]
+    },
+    {
+        "id": "211c95d471ba3f44",
+        "type": "inject",
+        "z": "cce8e835144d8c58",
+        "name": "1st floor",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "1st-floor_bedroom_ceiling-light_state",
+        "payload": "1+$floor($random() * 10)",
+        "payloadType": "jsonata",
+        "x": 370,
+        "y": 360,
+        "wires": [
+            [
+                "64caba78d1c97cf1"
+            ]
+        ]
+    },
+    {
+        "id": "0c41b196ce223a06",
+        "type": "inject",
+        "z": "cce8e835144d8c58",
+        "name": "Penthouse",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "penthouse_gym_humidity-sensor_actual_humidity",
+        "payload": "1+$floor($random() * 10)",
+        "payloadType": "jsonata",
+        "x": 380,
+        "y": 420,
+        "wires": [
+            [
+                "64caba78d1c97cf1"
+            ]
+        ]
+    }
+]

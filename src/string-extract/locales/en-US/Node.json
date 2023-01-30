@@ -1,0 +1,40 @@
+{
+    "binsoul-string-extract": {
+        "label": {
+            "extractionMode": "Extraction mode",
+            "extractionRegexpPattern": "Pattern",
+            "extractionRegexpFlags": "Flags",
+            "extractionSplitSeparator": "Separator",
+            "inputValue": "Input",
+            "outputMapping": "Output",
+            "outputMapping-value": "Value",
+            "outputMapping-target": "Target"
+        },
+        "help": {
+            "extractionMode": "",
+            "extractionRegexpPattern": "",
+            "extractionRegexpFlags": "",
+            "extractionSplitSeparator": "",
+            "inputValue": "",
+            "outputMapping": ""
+        },
+        "option": {
+            "extractionMode": {
+                "regexp": "Regular expression",
+                "split": "Split"
+            },
+            "outputMapping-value": {
+                "matches": "All matches/columns",
+                "match": "Match/column number"
+            },
+            "extractionRegexpFlags": {
+                "g": "g - Performs a global match, finding all matches rather than just the first.",
+                "i": "i - Makes matches case-insensitive.",
+                "m": "m - Performs multiline matches",
+                "s": "s - Allows \".\" to match newline characters.",
+                "u": "u - Enables Unicode support.",
+                "y": "y - Matches are sticky, looking only at exact position in the text."
+            }
+        }
+    }
+}

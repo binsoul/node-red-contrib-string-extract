@@ -1,0 +1,154 @@
+<script type="text/html" data-template-name="binsoul-string-extract">
+    <div class="binsoul-string-extract-wrapper">
+        <fieldset>
+            <div class="form-row" data-i18n="[title]binsoul-string-extract.help.extractionMode">
+                <label for="node-input-extractionMode" class="binsoul-string-extract-label">
+                    <span data-i18n="binsoul-string-extract.label.extractionMode"></span>
+                </label>
+                <select id="node-input-extractionMode" class="binsoul-string-extract-select">
+                    <option value="regexp" data-i18n="binsoul-string-extract.option.extractionMode.regexp"></option>
+                    <option value="split" data-i18n="binsoul-string-extract.option.extractionMode.split"></option>
+                </select>
+            </div>
+        </fieldset>
+
+        <fieldset id="extractionRegexp">
+            <div class="form-row" data-i18n="[title]binsoul-string-extract.help.extractionRegexpPattern">
+                <label for="node-input-extractionRegexpPattern" class="binsoul-string-extract-label">
+                    <span data-i18n="binsoul-string-extract.label.extractionRegexpPattern"></span>
+                </label>
+                <input type="text" id="node-input-extractionRegexpPattern" class="binsoul-string-extract-input">
+            </div>
+
+            <div class="form-row" data-i18n="[title]binsoul-string-extract.help.extractionRegexpFlags">
+                <label for="node-input-extractionRegexpFlags" class="binsoul-string-extract-label">
+                    <span data-i18n="binsoul-string-extract.label.extractionRegexpFlags"></span>
+                </label>
+                <select id="node-input-extractionRegexpFlags" class="binsoul-string-extract-select" multiple style="height: 9rem">
+                    <option value="g" data-i18n="binsoul-string-extract.option.extractionRegexpFlags.g"></option>
+                    <option value="i" data-i18n="binsoul-string-extract.option.extractionRegexpFlags.i"></option>
+                    <option value="m" data-i18n="binsoul-string-extract.option.extractionRegexpFlags.m"></option>
+                    <option value="s" data-i18n="binsoul-string-extract.option.extractionRegexpFlags.s"></option>
+                    <option value="u" data-i18n="binsoul-string-extract.option.extractionRegexpFlags.u"></option>
+                    <option value="y" data-i18n="binsoul-string-extract.option.extractionRegexpFlags.y"></option>
+                </select>
+            </div>
+        </fieldset>
+
+        <fieldset id="extractionSplit">
+            <div class="form-row" data-i18n="[title]binsoul-string-extract.help.extractionSplitSeparator">
+                <label for="node-input-extractionSplitSeparator" class="binsoul-string-extract-label">
+                    <span data-i18n="binsoul-string-extract.label.extractionSplitSeparator"></span>
+                </label>
+                <input type="text" id="node-input-extractionSplitSeparator" class="binsoul-string-extract-input">
+            </div>
+        </fieldset>
+
+        <hr>
+        <fieldset>
+            <div class="form-row" data-i18n="[title]binsoul-string-extract.help.inputValue">
+                <label for="node-input-inputValueProperty" class="binsoul-string-extract-label">
+                    <span data-i18n="binsoul-string-extract.label.inputValue"></span>
+                </label>
+                <input type="hidden" id="node-input-inputValueSource">
+                <input type="text" id="node-input-inputValueProperty" class="binsoul-string-extract-input">
+            </div>
+
+            <div class="form-row" data-i18n="[title]binsoul-string-extract.help.outputMapping">
+                <label class="binsoul-string-extract-label">
+                    <span data-i18n="binsoul-string-extract.label.outputMapping"></span>
+                </label>
+                <ol id="node-input-outputMapping-container" class="binsoul-string-extract-editable-list-items"></ol>
+            </div>
+        </fieldset>
+
+        <hr>
+        <fieldset>
+            <div class="form-row">
+                <label for="node-input-name" class="binsoul-string-extract-label">
+                    <i class="fa fa-tag"></i>
+                    <span data-i18n="node-red:common.label.name"></span>
+                </label>
+                <input type="text" id="node-input-name" data-i18n="[placeholder]node-red:common.label.name" class="binsoul-string-extract-input">
+            </div>
+        </fieldset>
+    </div>
+
+    <style>
+        .binsoul-string-extract-wrapper {
+            width: 30rem;
+            min-width: 20rem;
+        }
+
+        .binsoul-string-extract-select {
+            min-width: 100%;
+        }
+
+        .binsoul-string-extract-input {
+            min-width: 100%;
+        }
+
+        .binsoul-string-extract-label {
+            min-width: 100%;
+            font-weight: 700 !important;
+            font-size: calc(var(--red-ui-primary-font-size) - 1px) !important;
+            margin-bottom: 2px !important;
+        }
+
+        .binsoul-string-extract-columns {
+            display: flex;
+            gap: 2%;
+        }
+
+        .binsoul-string-extract-columns > input, .binsoul-string-extract-columns > select {
+            min-width: 49%;
+            max-width: 49%;
+        }
+
+        .binsoul-string-extract-editable-list-items .item {
+            display: flex;
+        }
+
+        .binsoul-string-extract-editable-list-items .item > .target {
+            width: 48%;
+            padding-right: 2%;
+        }
+
+        .binsoul-string-extract-editable-list-items .item > .value {
+            width: 48%;
+            padding-left: 2%;
+        }
+
+        .binsoul-string-extract-editable-list-items .item > .equals,
+        .binsoul-string-extract-editable-list-header .equals {
+            position: relative;
+        }
+
+        .binsoul-string-extract-editable-list-items .item > .equals span,
+        .binsoul-string-extract-editable-list-header .equals span {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            margin-top: -10px;
+            margin-left: -5px;
+        }
+
+        .binsoul-string-extract-editable-list-header {
+            display: flex;
+        }
+
+        .binsoul-string-extract-editable-list-header > div:first-child {
+            width: 26px;
+        }
+
+        .binsoul-string-extract-editable-list-header > .target {
+            width: calc(48% - 22px);
+            padding-right: 2%;
+        }
+
+        .binsoul-string-extract-editable-list-header > .value {
+            width: calc(48% - 26px);
+            padding-left: calc(2% - 2px);
+        }
+    </style>
+</script>
