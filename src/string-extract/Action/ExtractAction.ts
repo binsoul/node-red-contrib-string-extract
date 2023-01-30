@@ -4,6 +4,7 @@ import type { Configuration } from '../Configuration';
 
 interface Context {
     values: string[];
+
     [key: string]: string | string[];
 }
 

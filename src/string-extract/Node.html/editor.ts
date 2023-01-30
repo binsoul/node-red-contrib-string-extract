@@ -89,7 +89,10 @@ RED.nodes.registerType<NodeEditorProperties>('binsoul-string-extract', {
 
                 const targetContainer = $('<div/>', { class: 'target' });
                 targetContainer.appendTo(wrapper);
-                const targetInput = $('<input/>', { class: 'binsoul-string-extract-input node-input-outputMapping-target', type: 'text' });
+                const targetInput = $('<input/>', {
+                    class: 'binsoul-string-extract-input node-input-outputMapping-target',
+                    type: 'text',
+                });
                 targetInput.prependTo(targetContainer);
 
                 targetInput.typedInput({
@@ -104,13 +107,27 @@ RED.nodes.registerType<NodeEditorProperties>('binsoul-string-extract', {
                 const transformContainer = $('<div/>', { class: 'value' });
                 transformContainer.appendTo(wrapper);
 
-                const valueInput = $('<input/>', { class: 'binsoul-string-extract-input node-input-outputMapping-value', type: 'text' });
+                const valueInput = $('<input/>', {
+                    class: 'binsoul-string-extract-input node-input-outputMapping-value',
+                    type: 'text',
+                });
                 valueInput.appendTo(transformContainer);
 
                 valueInput.typedInput({
                     types: [
-                        { value: 'matches', label: this._('binsoul-string-extract.option.outputMapping-value.matches'), icon: 'fa fa-list', hasValue: false },
-                        { value: 'match', label: this._('binsoul-string-extract.option.outputMapping-value.match'), icon: 'fa fa-hashtag', hasValue: true, validate: RED.validators.number() },
+                        {
+                            value: 'matches',
+                            label: this._('binsoul-string-extract.option.outputMapping-value.matches'),
+                            icon: 'fa fa-list',
+                            hasValue: false,
+                        },
+                        {
+                            value: 'match',
+                            label: this._('binsoul-string-extract.option.outputMapping-value.match'),
+                            icon: 'fa fa-hashtag',
+                            hasValue: true,
+                            validate: RED.validators.number(),
+                        },
                         'str',
                         'num',
                         'bool',

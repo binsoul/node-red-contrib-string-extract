@@ -1,4 +1,4 @@
-<script type="text/html" data-template-name="binsoul-string-extract">
+<script data-template-name="binsoul-string-extract" type="text/html">
     <div class="binsoul-string-extract-wrapper">
         <fieldset>
             <div class="form-row" data-i18n="[title]binsoul-string-extract.help.extractionMode">
@@ -17,7 +17,7 @@
                 <label for="node-input-extractionRegexpPattern" class="binsoul-string-extract-label">
                     <span data-i18n="binsoul-string-extract.label.extractionRegexpPattern"></span>
                 </label>
-                <input type="text" id="node-input-extractionRegexpPattern" class="binsoul-string-extract-input">
+                <input type="text" id="node-input-extractionRegexpPattern" class="binsoul-string-extract-input" />
             </div>
 
             <div class="form-row" data-i18n="[title]binsoul-string-extract.help.extractionRegexpFlags">
@@ -40,18 +40,18 @@
                 <label for="node-input-extractionSplitSeparator" class="binsoul-string-extract-label">
                     <span data-i18n="binsoul-string-extract.label.extractionSplitSeparator"></span>
                 </label>
-                <input type="text" id="node-input-extractionSplitSeparator" class="binsoul-string-extract-input">
+                <input type="text" id="node-input-extractionSplitSeparator" class="binsoul-string-extract-input" />
             </div>
         </fieldset>
 
-        <hr>
+        <hr />
         <fieldset>
             <div class="form-row" data-i18n="[title]binsoul-string-extract.help.inputValue">
                 <label for="node-input-inputValueProperty" class="binsoul-string-extract-label">
                     <span data-i18n="binsoul-string-extract.label.inputValue"></span>
                 </label>
-                <input type="hidden" id="node-input-inputValueSource">
-                <input type="text" id="node-input-inputValueProperty" class="binsoul-string-extract-input">
+                <input type="hidden" id="node-input-inputValueSource" />
+                <input type="text" id="node-input-inputValueProperty" class="binsoul-string-extract-input" />
             </div>
 
             <div class="form-row" data-i18n="[title]binsoul-string-extract.help.outputMapping">
@@ -62,14 +62,14 @@
             </div>
         </fieldset>
 
-        <hr>
+        <hr />
         <fieldset>
             <div class="form-row">
                 <label for="node-input-name" class="binsoul-string-extract-label">
                     <i class="fa fa-tag"></i>
                     <span data-i18n="node-red:common.label.name"></span>
                 </label>
-                <input type="text" id="node-input-name" data-i18n="[placeholder]node-red:common.label.name" class="binsoul-string-extract-input">
+                <input type="text" id="node-input-name" data-i18n="[placeholder]node-red:common.label.name" class="binsoul-string-extract-input" />
             </div>
         </fieldset>
     </div>
@@ -100,7 +100,8 @@
             gap: 2%;
         }
 
-        .binsoul-string-extract-columns > input, .binsoul-string-extract-columns > select {
+        .binsoul-string-extract-columns > input,
+        .binsoul-string-extract-columns > select {
             min-width: 49%;
             max-width: 49%;
         }
