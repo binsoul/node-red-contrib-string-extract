@@ -8,7 +8,7 @@ interface NodeEditorProperties extends EditorNodeProperties, UserConfigurationOp
 
 RED.nodes.registerType<NodeEditorProperties>('binsoul-string-extract', {
     category: 'function',
-    color: '#A6BBCF',
+    color: '#D3A77D',
     defaults: {
         extractionMode: {
             value: 'regexp',
