@@ -1,6 +1,6 @@
 {
     "name": "@binsoul/node-red-contrib-string-extract",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Extract values from strings using regular expressions and other methods.",
     "keywords": [
         "node-red",
