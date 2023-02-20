@@ -54,6 +54,14 @@ RED.nodes.registerType<NodeEditorProperties>('binsoul-string-extract', {
     inputLabels: 'Incoming message',
     outputLabels: ['Outgoing message'],
     oneditprepare: function () {
+        setTimeout(() => {
+            $('.binsoul-string-extract-wrapper').css('width', '100%');
+            $('.binsoul-string-extract-wrapper .red-ui-typedInput-container').css({
+                width: 'auto',
+                display: 'flex',
+            });
+        });
+
         $('#node-input-inputValueProperty').typedInput({
             typeField: '#node-input-inputValueSource',
             types: ['msg', 'flow', 'global'],
