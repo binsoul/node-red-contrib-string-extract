@@ -1,6 +1,7 @@
 import { Action, Input, InputDefinition, Output, OutputDefinition } from '@binsoul/node-red-bundle-processing';
 import jsonata from 'jsonata';
 import type { Configuration } from '../Configuration';
+import { Storage } from '../Storage';
 
 interface Context {
     values: string[];
@@ -10,9 +11,13 @@ interface Context {
 
 export class ExtractAction implements Action {
     private readonly configuration: Configuration;
+    private readonly storage: Storage;
+    private readonly outputCallback: () => void;
 
-    constructor(configuration: Configuration) {
+    constructor(configuration: Configuration, storage: Storage, outputCallback: () => void) {
         this.configuration = configuration;
+        this.storage = storage;
+        this.outputCallback = outputCallback;
     }
 
     defineInput(): InputDefinition {
@@ -29,21 +34,7 @@ export class ExtractAction implements Action {
     }
 
     defineOutput(): OutputDefinition {
-        const result = new OutputDefinition();
-
-        let index = 1;
-        for (const output of this.configuration.outputMapping) {
-            result.set('output' + index, {
-                target: output.outputTarget,
-                property: output.outputProperty,
-                type: 'unknown',
-                channel: 0,
-            });
-
-            index++;
-        }
-
-        return result;
+        return new OutputDefinition();
     }
 
     execute(input: Input): Output {
@@ -77,12 +68,15 @@ export class ExtractAction implements Action {
             index++;
         }
 
-        index = 1;
+        const promises: Array<Promise<unknown>> = [];
         for (const output of this.configuration.outputMapping) {
-            result.setValue('output' + index, this.evaluate(output.valueSource, output.valueProperty, context));
-
-            index++;
+            promises.push(this.evaluate(output.valueSource, output.valueProperty, context));
         }
+
+        Promise.all(promises).then((values) => {
+            this.storage.setData(values);
+            this.outputCallback();
+        });
 
         result.setNodeStatus('');
 
@@ -107,26 +101,32 @@ export class ExtractAction implements Action {
         return inputValue.split(this.configuration.extractionSplitSeparator);
     }
 
-    private evaluate(type: string, value: string, context: Context): unknown {
-        let result: unknown = value;
+    private evaluate(type: string, value: string, context: Context): Promise<unknown> {
+        let result: Promise<unknown> = new Promise((resolve) => resolve(value));
 
         if (type === 'match') {
-            result = context['value' + Number(value)] || null;
+            result = new Promise((resolve) => resolve(context['value' + Number(value)] || null));
         } else if (type === 'matches') {
-            result = context.values || [];
+            result = new Promise((resolve) => resolve(context.values || []));
         } else if (type === 'str') {
-            result = '' + value;
+            result = new Promise((resolve) => resolve('' + value));
         } else if (type === 'num') {
-            result = Number(value);
+            result = new Promise((resolve) => resolve(Number(value)));
         } else if (type === 'json') {
-            result = JSON.parse(value);
+            result = new Promise((resolve) => resolve(JSON.parse(value)));
         } else if (type === 'date') {
-            result = Date.now();
+            result = new Promise((resolve) => resolve(Date.now()));
         } else if (type === 'bool') {
-            result = /^true$/i.test(value);
+            result = new Promise((resolve) => resolve(/^true$/i.test(value)));
         } else if (type === 'jsonata') {
             const expr = jsonata(value);
-            result = expr.evaluate(context);
+            const evaluated = expr.evaluate(context);
+
+            if (evaluated instanceof Promise) {
+                result = evaluated;
+            } else {
+                result = new Promise((resolve) => resolve(evaluated));
+            }
         }
 
         return result;
