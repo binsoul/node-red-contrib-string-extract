@@ -1,4 +1,4 @@
-import { Action, Input, InputDefinition, Message, Output, OutputDefinition } from '@binsoul/node-red-bundle-processing';
+import { Action, Input, InputDefinition, Output, OutputDefinition } from '@binsoul/node-red-bundle-processing';
 import jsonata from 'jsonata';
 import type { Configuration } from '../Configuration';
 import { Storage } from '../Storage';
@@ -12,9 +12,9 @@ interface Context {
 export class ExtractAction implements Action {
     private readonly configuration: Configuration;
     private readonly storage: Storage;
-    private readonly outputCallback: (message: Message) => void;
+    private readonly outputCallback: () => void;
 
-    constructor(configuration: Configuration, storage: Storage, outputCallback: (message: Message) => void) {
+    constructor(configuration: Configuration, storage: Storage, outputCallback: () => void) {
         this.configuration = configuration;
         this.storage = storage;
         this.outputCallback = outputCallback;
@@ -74,8 +74,8 @@ export class ExtractAction implements Action {
         }
 
         Promise.all(promises).then((values) => {
-            this.storage.setData(values);
-            this.outputCallback(input.getMessage());
+            this.storage.addMessageData(input.getMessage(), values);
+            this.outputCallback();
         });
 
         result.setNodeStatus('');

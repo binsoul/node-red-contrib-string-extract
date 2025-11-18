@@ -32,21 +32,18 @@ export class ActionFactory implements ActionFactoryInterface {
         const command = data.command;
 
         if (typeof command !== 'undefined' && ('' + command).trim() !== '') {
-            delete message.data.command;
-
             switch (command.toLowerCase()) {
                 case 'output':
                     return new OutputAction(this.configuration, this.storage);
             }
         }
 
-        return new ExtractAction(this.configuration, this.storage, (message: Message) => this.outputCallback(message));
+        return new ExtractAction(this.configuration, this.storage, () => this.outputCallback());
     }
 
-    outputCallback(originalMessage: Message): void {
-        const clone = this.RED.util.cloneMessage(originalMessage.data);
-        clone.command = 'output';
-
-        this.node.receive(clone);
+    outputCallback(): void {
+        this.node.receive(<MessageData>{
+            command: 'output',
+        });
     }
 }
