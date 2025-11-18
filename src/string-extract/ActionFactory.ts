@@ -32,6 +32,8 @@ export class ActionFactory implements ActionFactoryInterface {
         const command = data.command;
 
         if (typeof command !== 'undefined' && ('' + command).trim() !== '') {
+            delete message.data.command;
+
             switch (command.toLowerCase()) {
                 case 'output':
                     return new OutputAction(this.configuration, this.storage);
