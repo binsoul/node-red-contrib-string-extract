@@ -1,5 +1,5 @@
 import { Action, ActionFactory as ActionFactoryInterface, Message } from '@binsoul/node-red-bundle-processing';
-import type { Node, NodeAPI } from '@node-red/registry';
+import { Node, NodeAPI } from '@node-red/registry';
 import { NodeMessageInFlow } from 'node-red';
 import { ExtractAction } from './Action/ExtractAction';
 import { OutputAction } from './Action/OutputAction';
@@ -38,12 +38,13 @@ export class ActionFactory implements ActionFactoryInterface {
             }
         }
 
-        return new ExtractAction(this.configuration, this.storage, () => this.outputCallback());
+        return new ExtractAction(this.configuration, this.storage, (message: Message) => this.outputCallback(message));
     }
 
-    outputCallback(): void {
-        this.node.receive(<MessageData>{
-            command: 'output',
-        });
+    outputCallback(originalMessage: Message): void {
+        const clone = this.RED.util.cloneMessage(originalMessage.data);
+        clone.command = 'output';
+
+        this.node.receive(clone);
     }
 }
