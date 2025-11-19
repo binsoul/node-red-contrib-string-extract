@@ -1,7 +1,7 @@
 import { Action, Input, InputDefinition, Output, OutputDefinition } from '@binsoul/node-red-bundle-processing';
 import jsonata from 'jsonata';
-import type { Configuration } from '../Configuration';
-import { Storage } from '../Storage';
+import type { Configuration } from '../Configuration.js';
+import { Storage } from '../Storage.js';
 
 interface Context {
     values: string[];

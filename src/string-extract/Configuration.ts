@@ -1,4 +1,4 @@
-import { MappedOutput } from './MappedOutput';
+import { MappedOutput } from './MappedOutput.js';
 
 /**
  * Sanitized configuration generated from user input.

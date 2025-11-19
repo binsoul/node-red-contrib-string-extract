@@ -1,10 +1,10 @@
 import { Action, ActionFactory as ActionFactoryInterface, Message } from '@binsoul/node-red-bundle-processing';
 import { Node, NodeAPI } from '@node-red/registry';
 import { NodeMessageInFlow } from 'node-red';
-import { ExtractAction } from './Action/ExtractAction';
-import { OutputAction } from './Action/OutputAction';
-import type { Configuration } from './Configuration';
-import { Storage } from './Storage';
+import { ExtractAction } from './Action/ExtractAction.js';
+import { OutputAction } from './Action/OutputAction.js';
+import type { Configuration } from './Configuration.js';
+import { Storage } from './Storage.js';
 
 interface MessageData extends NodeMessageInFlow {
     command?: string;
